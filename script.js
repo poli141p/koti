@@ -1,5 +1,6 @@
 var food1, food2, food3, cat;
 var score = 0;
+var age = 0;
 
 var f1, f2, f3;
 
@@ -23,18 +24,29 @@ class Food {
       img = food3;
     }
 
-    image(img, this.x, this.y, 80, 80);
+    image(img, this.x, this.y, 70, 70);
     textSize(30);
-    text(this.count, this.x + 30, this.y + 110);
+    fill(226, 134, 184);
+    stroke(0);
+    strokeWeight(4);
+    text(this.count, this.x + 30, this.y + 90);
   }
 
   feed() {
-    this.count -= 1;
-    score += 1;
+    if(this.count > 0) {
+      this.count -= 1;
+        score += 1;
+
+        if (score >= 20) {
+          age += 1;
+          score = 0;
+        }
+    }
   }
 }
 
 function preload() {
+  bg = loadImage('img/back.png');
   cat = loadImage("img/cat1.png");
   food1 = loadImage('img/food1.png');
   food2 = loadImage('img/food2.png');
@@ -43,20 +55,20 @@ function preload() {
 
 function setup() {
   createCanvas(400, 400);
-  f1 = new Food(50, 250, 2, 1);
-  f2 = new Food(150, 250, 2, 2);
-  f3 = new Food(250, 250, 2, 3);
+  f1 = new Food(50, 290, 2, 1);
+  f2 = new Food(160, 290, 2, 2);
+  f3 = new Food(270, 290, 2, 3);
 }
 
 function draw() {
-  background("#B0C4DE");
-
-  image(cat, 150, 100, 140, 140);
+  background(bg);
+  image(cat, 150, 150, 150, 150);
   f1.draw();
   f2.draw();
   f3.draw();
 
   text(score, 350, 50);
+  text(age, 50, 50);
 
 
   if (frameCount % 120 == 0) {
@@ -68,6 +80,10 @@ function draw() {
   if (frameCount % 180 == 0) {
     f3.count += 1;
   }
+}
+
+if(age >= 3){
+  cat = loadImage("img/cat1.png");
 }
 
 function mousePressed() {

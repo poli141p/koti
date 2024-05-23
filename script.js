@@ -4,6 +4,8 @@ var age = 0;
 
 var f1, f2, f3;
 
+var catN = 1;
+
 class Food {
   constructor(x, y, count, type) {
     this.x = x;
@@ -48,6 +50,7 @@ class Food {
 function preload() {
   bg = loadImage('img/back.png');
   cat = loadImage("img/cat1.png");
+  cat2 = loadImage("img/cat2.png");
   food1 = loadImage('img/food1.png');
   food2 = loadImage('img/food2.png');
   food3 = loadImage('img/food3.png');
@@ -62,7 +65,13 @@ function setup() {
 
 function draw() {
   background(bg);
+  if (catN == 1) {
   image(cat, 150, 150, 150, 150);
+  }
+  if (catN == 2) {
+  image(cat2, 150, 150, 150, 150);
+  }
+  
   f1.draw();
   f2.draw();
   f3.draw();
@@ -82,18 +91,22 @@ function draw() {
   }
 }
 
-if(age >= 3){
-  cat = loadImage("img/cat1.png");
-}
 
 function mousePressed() {
-  if (mouseX > f1.x && mouseX < f1.x + 80) {
+  if (mouseX > f1.x && mouseX < f1.x + 50) {
     f1.feed();
-  }
-  if (mouseX > f2.x && mouseX < f2.x + 80) {
+  } else
+  if (mouseX > f2.x && mouseX < f2.x + 50) {
     f2.feed();
-  }
-  if (mouseX > f3.x && mouseX < f3.x + 80) {
+  } else
+  if (mouseX > f3.x && mouseX < f3.x + 50) {
     f3.feed();
+  } else
+
+  if (catN == 1) {
+    catN = 2;
+  } else
+  if (catN == 2) {
+    catN = 1;
   }
 }
